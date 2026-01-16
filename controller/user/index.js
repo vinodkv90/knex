@@ -1,6 +1,14 @@
+const userService = require('../../service/user');
+
 class UserController {
-    createUser(req, res) {
-        res.send('Create User');
+    async createUser(req, res) {
+        try {
+            const id = await userService.createUser(req.body);
+            res.status(201).json({ id });
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
     }
 }
 
