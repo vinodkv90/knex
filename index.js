@@ -3,6 +3,8 @@ const cookieParser = require('cookie-parser');
 const router = require('./routes/auth');
 const path = require('path');
 const dotenv = require('dotenv');
+const cors = require("cors");
+
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 });
@@ -13,6 +15,7 @@ const port = 8080;
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.urlencoded({ extended: true }));
+app.use(cors()); // allow all origins
 
 // Debug middleware
 app.use((req, res, next) => {
