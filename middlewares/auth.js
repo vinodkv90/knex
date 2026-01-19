@@ -1,4 +1,4 @@
-const { verifyToken } = require('../utils/jwt');
+// const { verifyToken } = require('../utils/jwt');
 
 module.exports = (req, res, next) => {
   // const authHeader = req.headers.authorization;
@@ -33,6 +33,7 @@ module.exports = (req, res, next) => {
     }
 
     req.user = { id: data.id };
+    console.log(`data==========`, data)
     next();
   } catch {
     return res.status(401).json({ error: 'Invalid session' });

@@ -1,6 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const router = require('./routes/auth');
+const authRouter = require('./routes/auth');
+const homeRouter = require('./routes/home');
 const path = require('path');
 const dotenv = require('dotenv');
 const cors = require("cors");
@@ -25,7 +26,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/auth', router);
+app.use('/api/auth', authRouter);
+app.use('/api/home', homeRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
