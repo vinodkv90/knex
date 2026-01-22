@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/auth');
 const homeRouter = require('./routes/home');
+const logoutRouter = require('./routes/logout');
 const path = require('path');
 const dotenv = require('dotenv');
 const cors = require("cors");
@@ -16,7 +17,10 @@ const port = 8080;
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.urlencoded({ extended: true }));
-app.use(cors()); // allow all origins
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+})); // allow all origins
 
 // Debug middleware
 app.use((req, res, next) => {
@@ -28,6 +32,7 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/home', homeRouter);
+app.use('/api/logout', logoutRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
